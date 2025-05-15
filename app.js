@@ -7,6 +7,7 @@ const Roles = require("./src/models/role");
 const Users = require("./src/models/user");
 const indexRouter = require("./src/routes");
 const AuctionCategory = require("./src/models/auctionCategory");
+const Auction = require("./src/models/auction");
 
 require("dotenv").config();
 
@@ -25,6 +26,7 @@ app.listen(PORT, async () => {
     await Roles.sync();
     await Users.sync();
     await AuctionCategory.sync();
+    await Auction.sync();
   } catch (error) {
     console.error("ERROR", error.message);
   }

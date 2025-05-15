@@ -1,22 +1,50 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/dbConnect");
 const Users = require("./user");
+const AuctionCategory = require("./auctionCategory");
 
-const AuctionCategory = sequelize.define(
-  "AuctionCategory",
+const Auction = sequelize.define(
+  "Auction",
   {
-    name: {
+   item_name: {
         type:DataTypes.STRING,
         allowNull:false,
         unique:true
     },
-    description: {
-        type:DataTypes.TEXT,
+    base_price: {
+        type:DataTypes.FLOAT,
         allowNull:false
     },
-    icon: {
-        type:DataTypes.STRING,
+    description: {
+        type:DataTypes.TEXT,
         allowNull:false,
+    },
+    start_date:{
+        type:DataTypes.DATE,
+        allowNull:false
+    },
+    end_date:{
+        type:DataTypes.DATE,
+        allowNull:false
+    },
+    status:{
+        type:DataTypes.ENUM("pending","active","completed","rejected"),
+        defaultValue:"pending"
+    },
+    rejected_reason:{
+        type:DataTypes.TEXT,
+    },
+    category_id:{
+        type:DataTypes.INTEGER,
+        references:{
+            model:AuctionCategory,
+            key:'id'
+        },
+        allowNull:false
+    },
+    images:{
+        type:DataTypes.JSON,
+        allowNull:false
     },
     created_by: {
         type:DataTypes.INTEGER,
@@ -44,22 +72,12 @@ const AuctionCategory = sequelize.define(
             key:'id'
         }
     },
-    updated_at: {
-        type:DataTypes.DATE,
-        allowNull:true,
-        defaultValue:null
-    },
   },
   {
-    tableName: "auction_category",
+    tableName: "auctions",
     paranoid: true,
     underscored: true,
-    hooks: {
-      beforeCreate: (info) => {
-        info.updated_at = null;
-      },
-    },
   }
 );
 
-module.exports = AuctionCategory;
+module.exports = Auction;
