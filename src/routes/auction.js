@@ -6,12 +6,16 @@ const createAuctionSchema = require("../middlewares/validationSchema/createAucti
 const authenticateToken = require("../middlewares/authMiddleware");
 
 auctionRouter
-  .get("/",authenticateToken, auctionController.allAuction)
   .post(
     "/create",
     validateSchema(createAuctionSchema),
     authenticateToken,
     auctionController.createAuction
-  );
+  )
+  .put("/update/:id",validateSchema(createAuctionSchema),authenticateToken,auctionController.updateAuction)
+  .get("/", auctionController.getActiveAuctions)
+  .get("/auction-detail/:id",auctionController.getAuctionDetailById)
+  .get("/my-auction", authenticateToken ,auctionController.getMyAuctions);
+
 
 module.exports = auctionRouter;

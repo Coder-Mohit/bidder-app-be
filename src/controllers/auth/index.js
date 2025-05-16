@@ -36,6 +36,8 @@ const registerUser = async (req, res) => {
 const verifyAccount = async (req, res) => {
   try {
     const { token } = req.params;
+    console.log(token);
+    
     if (!token) {
       throw new Error(ERROR_MESSAGE.INVALID_TOKEN);
     }
@@ -64,6 +66,9 @@ const loginUser = async (req, res) => {
     );
     sendSuccessResponse(res, SUCCESS_MESSAGE.USER_LOGIN, result, 200);
   } catch (error) {
+
+    console.log(error.message);
+    
     sendErrorResponse(
       res,
       error.message || ERROR_MESSAGE.SOMETHING_WENT_WRONG,

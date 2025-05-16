@@ -1,7 +1,7 @@
 const AuctionCategory = require("../../models/auctionCategory");
 const { ERROR_MESSAGE } = require("../../utils/propertyResolver");
 
-const saveAuctionCategory = async(auctionDetails)=>{
+const saveAuctionCategory = async(auctionDetails,userId)=>{
     try {
         const {name} = auctionDetails;
         const isAuctionCategoryPresent = await AuctionCategory.findOne({
@@ -15,7 +15,7 @@ const saveAuctionCategory = async(auctionDetails)=>{
         const auctionCategoryDetails = await AuctionCategory.create(
             {
                 ...auctionDetails,
-                created_by:10, //need to change
+                created_by:userId, //need to change
             }
         )
         return auctionCategoryDetails;

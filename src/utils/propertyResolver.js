@@ -7,7 +7,12 @@ exports.ERROR_MESSAGE={
     USER_NOT_ACTIVE:"your account is not active",
     USER_NOT_FOUND:"User not found",
     AUCTION_CATEGORY_EXIST:"Auction category already exist",
-    TOKEN_REQUIRED:"Token is required"
+    TOKEN_REQUIRED:"Token is required",
+    AUCTION_ID_REQUIRED:"Auction id is required",
+    AUCTION_NOT_FOUND:"Auction not found",
+    CANNOT_BID_OWN_AUCTION:"you can not bid on your own auction",
+    BID_AMT_LESS:"Bid amount always greater then base amount",
+    BID_ALREADY_APPLIED:"Bid already applied"
 }
 
 exports.SUCCESS_MESSAGE={
@@ -17,5 +22,7 @@ exports.SUCCESS_MESSAGE={
     USER_LOGIN:"user successfully login",
     FORGOT_EMAIL_SEND:"send a email for update password",
     PASSWORD_UPDATED:"password updated successfully",
-    AUCTION_CATEGORY_CREATED:"auction category created successfully"
+    AUCTION_CATEGORY_CREATED:"auction category created successfully",
+    AUCTION_UPDATED:"Auction updated successfully",
+    BID_CREATE:"Bid created successfully",
 }

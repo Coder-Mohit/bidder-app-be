@@ -127,17 +127,17 @@ const verifyAccountToken = async (token) => {
         verify_account_token: token,
       },
     });
+	
     if (!user) throw new Error(ERROR_MESSAGE.INVALID_TOKEN);
-    const currentTime = new Date();
-    const expirationTime = user.verify_account_expires;
-    const formattedCurrentTime = currentTime
-      .toISOString()
-      .slice(0, 19)
-      .replace("T", " ");
-    if (formattedCurrentTime > expirationTime) {
-      throw new Error(error.message);
-    }
-
+	const currentTime = new Date();
+	const expirationTime = user.verify_account_expires; // should be a timestamp like 1747397180143
+	
+	// No need to format currentTime for comparison
+	if (currentTime.getTime() > expirationTime) {
+	  throw new Error("Account verification has expired.");
+	}
+	
+	
     await user.update({
       is_active: true,
       verify_account_token: null,
